@@ -1,14 +1,11 @@
-import useFetch from '../hooks/useFetch';
+import { useContext } from 'react';
+import { FilterContext } from '../context/FilterContext';
 
 function Table() {
-  const dataFetch = useFetch('https://swapi.dev/api/planets');
-  const { isLoading, data } = dataFetch;
-  if (isLoading) {
-    console.log('entrou');
-    return <h1>loading...</h1>;
-  }
-  console.log(data);
-  const planets = (data.map((planet, index) => {
+  const { dataPlanets } = useContext(FilterContext);
+  console.log(dataPlanets);
+
+  const planets = (dataPlanets.map((planet, index) => {
     const {
       climate,
       created,

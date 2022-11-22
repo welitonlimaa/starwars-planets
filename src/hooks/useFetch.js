@@ -28,7 +28,7 @@ function useFetch(url) {
 
   useEffect(() => {
     fetchAPI();
-  }, []);
+  }, [url]);
 
   return { isLoading, data, errors };
 }
