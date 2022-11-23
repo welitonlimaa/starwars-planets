@@ -1,11 +1,12 @@
 import { useContext, useState, useEffect } from 'react';
 import { FilterContext } from '../context/FilterContext';
 
-const columOptions = ['population', 'orbital_period', 'diameter',
+const columOptionsInit = ['population', 'orbital_period', 'diameter',
   'rotation_period', 'surface_water'];
 const comparisonOptions = ['maior que', 'menor que', 'igual a'];
 
 function Filters() {
+  const [columOptions, setColumOptions] = useState(columOptionsInit);
   const { data, setDataPlanets } = useContext(FilterContext);
   const [nameSearch, setNameSearch] = useState('');
   const [columFilter, setColumFilter] = useState(columOptions[0]);
@@ -20,9 +21,11 @@ function Filters() {
       value: valueFilter,
     };
     setFilter((prevState) => ([...prevState, newFilter]));
-  };
 
-  // console.log(filters);
+    const newColumOptions = columOptions.filter((colum) => colum !== columFilter);
+    setColumOptions(newColumOptions);
+    setColumFilter(newColumOptions[0]);
+  };
 
   const searchPlanets = data.filter((planet) => {
     const statusName = planet.name.toLowerCase().includes(nameSearch.toLowerCase());

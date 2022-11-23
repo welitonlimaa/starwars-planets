@@ -3,7 +3,6 @@ import { FilterContext } from '../context/FilterContext';
 
 function Table() {
   const { dataPlanets } = useContext(FilterContext);
-  console.log(dataPlanets);
 
   const planets = (dataPlanets.map((planet, index) => {
     const {
