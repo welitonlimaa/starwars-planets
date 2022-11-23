@@ -11,27 +11,41 @@ function Filters() {
   const [columFilter, setColumFilter] = useState(columOptions[0]);
   const [comparisonFilter, setComparisonFilter] = useState(comparisonOptions[0]);
   const [valueFilter, setValueFilter] = useState('0');
+  const [filters, setFilter] = useState([]);
 
-  const searchPlanets = data.filter((planet) => planet.name.toLowerCase()
-    .includes(nameSearch.toLowerCase()));
-
-  useEffect(() => setDataPlanets(searchPlanets), [nameSearch]);
-
-  const filter = () => {
-    const filteredPlanets = data.filter((planet) => {
-      switch (comparisonFilter) {
-      case comparisonOptions[0]:
-        return Number(planet[columFilter]) > Number(valueFilter);
-      case comparisonOptions[1]:
-        return Number(planet[columFilter]) < Number(valueFilter);
-      case comparisonOptions[2]:
-        return Number(planet[columFilter]) === Number(valueFilter);
-      default:
-        return planet;
-      }
-    });
-    setDataPlanets(filteredPlanets);
+  const insertFilter = () => {
+    const newFilter = {
+      colum: columFilter,
+      comparison: comparisonFilter,
+      value: valueFilter,
+    };
+    setFilter((prevState) => ([...prevState, newFilter]));
   };
+
+  // console.log(filters);
+
+  const searchPlanets = data.filter((planet) => {
+    const statusName = planet.name.toLowerCase().includes(nameSearch.toLowerCase());
+    if (filters.length > 0) {
+      const statusFilter = filters.every((filtered) => {
+        switch (filtered.comparison) {
+        case comparisonOptions[0]:
+          return Number(planet[filtered.colum]) > Number(filtered.value);
+        case comparisonOptions[1]:
+          return Number(planet[filtered.colum]) < Number(filtered.value);
+        case comparisonOptions[2]:
+          return Number(planet[filtered.colum]) === Number(filtered.value);
+        default:
+          return false;
+        }
+      });
+      // console.log(statusName, statusFilter);
+      return (statusName && statusFilter);
+    }
+    return statusName;
+  });
+
+  useEffect(() => setDataPlanets(searchPlanets), [nameSearch, filters]);
 
   return (
     <div>
@@ -85,10 +99,21 @@ function Filters() {
         <button
           data-testid="button-filter"
           type="button"
-          onClick={ () => filter() }
+          onClick={ () => insertFilter() }
         >
           FILTRAR
         </button>
+      </div>
+      <div>
+        {filters.map((filtered, index) => (
+          <p key={ index }>
+            <span>{filtered.colum}</span>
+            {' '}
+            <span>{filtered.comparison}</span>
+            {' '}
+            <span>{filtered.value}</span>
+          </p>
+        ))}
       </div>
     </div>
   );
