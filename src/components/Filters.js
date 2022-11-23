@@ -8,11 +8,15 @@ const comparisonOptions = ['maior que', 'menor que', 'igual a'];
 function Filters() {
   const [columOptions, setColumOptions] = useState(columOptionsInit);
   const { data, setDataPlanets } = useContext(FilterContext);
+
   const [nameSearch, setNameSearch] = useState('');
+
   const [columFilter, setColumFilter] = useState(columOptions[0]);
   const [comparisonFilter, setComparisonFilter] = useState(comparisonOptions[0]);
   const [valueFilter, setValueFilter] = useState('0');
   const [filters, setFilter] = useState([]);
+
+  const [objSort, setObjSort] = useState({ column: 'population', sort: 'ASC' });
 
   const insertFilter = () => {
     const newFilter = {
@@ -60,8 +64,39 @@ function Filters() {
       });
       setFilter(newFilters);
       setColumOptions(newColumOptions);
-      console.log(newFilters, newColumOptions);
     }
+  };
+
+  const renderByOrder = () => {
+    const orderAsc = (a, b) => {
+      console.log(a, b);
+      const x = Number(a[objSort.column]);
+      const y = Number(b[objSort.column]);
+      return x - y;
+    };
+
+    const orderDesc = (a, b) => {
+      console.log(a, b);
+      const x = Number(a[objSort.column]);
+      const y = Number(b[objSort.column]);
+      return y - x;
+    };
+
+    const onlyNumberData = searchPlanets
+      .filter((planet) => planet[objSort.column] !== 'unknown');
+
+    const onlyStringData = searchPlanets
+      .filter((planet) => planet[objSort.column] === 'unknown');
+
+    let dataOrder = [];
+    if (objSort.sort === 'ASC') {
+      dataOrder = onlyNumberData.sort(orderAsc);
+    } else {
+      dataOrder = onlyNumberData.sort(orderDesc);
+    }
+
+    const newDataPlanets = [...dataOrder, ...onlyStringData];
+    setDataPlanets(newDataPlanets);
   };
 
   useEffect(() => setDataPlanets(searchPlanets), [nameSearch, filters]);
@@ -142,6 +177,55 @@ function Filters() {
             </button>
           </div>
         ))}
+      </div>
+      <div>
+        <label htmlFor="column-sort">
+          Ordenar
+          <select
+            data-testid="column-sort"
+            id="column-sort"
+            onChange={ (e) => setObjSort((prevState) => (
+              { ...prevState, column: e.target.value })) }
+            defaultValue={ objSort.column }
+          >
+            {
+              columOptionsInit.map((option, index) => (
+                <option key={ index }>{ option }</option>
+              ))
+            }
+          </select>
+        </label>
+        <label htmlFor="column-sort-input-asc">
+          Ascendente
+          <input
+            type="radio"
+            id="column-sort-input-asc"
+            data-testid="column-sort-input-asc"
+            name="SORT"
+            value="ASC"
+            onChange={ (e) => setObjSort((prevState) => (
+              { ...prevState, sort: e.target.value })) }
+          />
+        </label>
+        <label htmlFor="column-sort-input-desc">
+          Descendente
+          <input
+            type="radio"
+            id="column-sort-input-desc"
+            data-testid="column-sort-input-desc"
+            name="SORT"
+            value="DESC"
+            onChange={ (e) => setObjSort((prevState) => (
+              { ...prevState, sort: e.target.value })) }
+          />
+          <button
+            type="button"
+            data-testid="column-sort-button"
+            onClick={ () => renderByOrder() }
+          >
+            ORDENAR
+          </button>
+        </label>
       </div>
       <button
         type="button"
