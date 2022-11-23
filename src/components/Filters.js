@@ -42,11 +42,27 @@ function Filters() {
           return false;
         }
       });
-      // console.log(statusName, statusFilter);
       return (statusName && statusFilter);
     }
     return statusName;
   });
+
+  const deleteFilter = (colum, allFilters) => {
+    if (allFilters) {
+      setFilter([]);
+      setColumOptions(columOptionsInit);
+    } else {
+      const newFilters = filters.filter((filtered) => filtered.colum !== colum);
+      const newColumOptions = columOptionsInit.filter((option) => {
+        const statusColum = newFilters
+          .some((filterColum) => filterColum.colum === option);
+        return !statusColum;
+      });
+      setFilter(newFilters);
+      setColumOptions(newColumOptions);
+      console.log(newFilters, newColumOptions);
+    }
+  };
 
   useEffect(() => setDataPlanets(searchPlanets), [nameSearch, filters]);
 
@@ -109,15 +125,31 @@ function Filters() {
       </div>
       <div>
         {filters.map((filtered, index) => (
-          <p key={ index }>
+          <div
+            key={ index }
+            data-testid="filter"
+          >
             <span>{filtered.colum}</span>
             {' '}
             <span>{filtered.comparison}</span>
             {' '}
             <span>{filtered.value}</span>
-          </p>
+            <button
+              type="button"
+              onClick={ () => deleteFilter(filtered.colum, false) }
+            >
+              X
+            </button>
+          </div>
         ))}
       </div>
+      <button
+        type="button"
+        data-testid="button-remove-filters"
+        onClick={ () => deleteFilter('', true) }
+      >
+        REMOVER FILTROS
+      </button>
     </div>
   );
 }
