@@ -154,6 +154,7 @@ function Filters() {
           data-testid="button-filter"
           type="button"
           onClick={ () => insertFilter() }
+          name="FILTRAR"
         >
           FILTRAR
         </button>
