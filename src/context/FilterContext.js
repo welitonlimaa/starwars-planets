@@ -9,12 +9,6 @@ export function FilterProvider({ children }) {
   const { isLoading, data } = dataFetch;
   const [dataPlanets, setDataPlanets] = useState([]);
 
-  // const values = useMemo(() => ({
-  //   isLoading,
-  //   dataPlanets,
-  //   setDataPlanets,
-  // }), []);
-
   useEffect(() => setDataPlanets(data), [isLoading]);
 
   const values = {
