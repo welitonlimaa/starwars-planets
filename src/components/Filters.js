@@ -69,14 +69,12 @@ function Filters() {
 
   const renderByOrder = () => {
     const orderAsc = (a, b) => {
-      console.log(a, b);
       const x = Number(a[objSort.column]);
       const y = Number(b[objSort.column]);
       return x - y;
     };
 
     const orderDesc = (a, b) => {
-      console.log(a, b);
       const x = Number(a[objSort.column]);
       const y = Number(b[objSort.column]);
       return y - x;
@@ -173,6 +171,7 @@ function Filters() {
             <button
               type="button"
               onClick={ () => deleteFilter(filtered.colum, false) }
+              name="X"
             >
               X
             </button>
