@@ -26,7 +26,7 @@ test('se a tabela é preenchida com os dados da API', async () => {
   await waitForElementToBeRemoved(loading);
 
   const planetsNames = screen.getAllByTestId("planet-name");
-  // const planetsNames = screen.getAllByRole("cell");
+
   expect(planetsNames).toHaveLength(10);
 });
 
@@ -62,7 +62,7 @@ test('se é possivel filtrar os planetas por coluna', async () => {
   
   userEvent.clear(inputValue);
   userEvent.type(inputValue, '1000');
-  console.log(inputValue)
+
   const namePlanet = screen.getByText('Yavin IV');
 
   userEvent.click(buttonFilter);
@@ -74,4 +74,30 @@ test('se é possivel filtrar os planetas por coluna', async () => {
 
   // const planetsNames = screen.getAllByTestId("planet-name");
   // expect(planetsNames).toHaveLength(1);
+});
+
+test('se é possivel order a data por coluna em ordem ascendente ou descendente', async () => {
+  render(
+    <FilterProvider>
+      <App />
+    </FilterProvider>
+  );
+  const loading = screen.getByText("loading...");
+  await waitForElementToBeRemoved(loading);
+
+  const orderAsc = screen.getByLabelText('Ascendente')
+  userEvent.click(orderAsc);
+
+  const buttonOrder = screen.getAllByRole('button')[1];
+  userEvent.click(buttonOrder);
+
+  const planetsNames = screen.getAllByTestId("planet-name");
+  expect(planetsNames[0]).toHaveTextContent('Yavin IV');
+
+  const orderDesc = screen.getByLabelText('Descendente')
+  userEvent.click(orderDesc);
+
+  userEvent.click(buttonOrder);
+
+  expect(planetsNames[0]).toHaveTextContent('Coruscant');
 });
