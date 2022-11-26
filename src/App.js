@@ -2,6 +2,8 @@ import { useContext } from 'react';
 import { FilterContext } from './context/FilterContext';
 import Filters from './components/Filters';
 import Table from './components/Table';
+import './App.css';
+import grafismo from './images/grafismo.png';
 
 function App() {
   const { dataPlanets, isLoading } = useContext(FilterContext);
@@ -9,10 +11,13 @@ function App() {
     return <h1>loading...</h1>;
   }
   return (
-    <>
-      <Filters />
-      <Table />
-    </>
+    <main className="app-body">
+      <img src={ grafismo } alt="grafismo" id="img-grafismo" />
+      <div className="container-main">
+        <Filters />
+        <Table />
+      </div>
+    </main>
   );
 }
 

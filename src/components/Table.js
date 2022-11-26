@@ -28,10 +28,10 @@ function Table() {
         <td>{diameter}</td>
         <td>{climate}</td>
         <td>{gravity}</td>
-        <td>{terrain}</td>
+        <td className="container-table-terrain">{terrain}</td>
         <td>{surfaceWater}</td>
         <td>{population}</td>
-        <td>
+        <td className="container-table-films">
           {films.map((film, indexFilm) => <p key={ indexFilm }>{film}</p>)}
         </td>
         <td>{created}</td>
@@ -51,10 +51,10 @@ function Table() {
           <th>Diameter</th>
           <th>Climate</th>
           <th>Gravity</th>
-          <th>Terrain</th>
+          <th className="container-table-terrain">Terrain</th>
           <th>Surface Water</th>
           <th>Population</th>
-          <th>Films</th>
+          <th className="container-table-films">Films</th>
           <th>Created</th>
           <th>Edited</th>
           <th>Url</th>

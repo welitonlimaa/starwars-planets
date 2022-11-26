@@ -100,7 +100,7 @@ function Filters() {
   useEffect(() => setDataPlanets(searchPlanets), [nameSearch, filters]);
 
   return (
-    <div>
+    <div className="container-filters">
       <label htmlFor="name-filter">
         <input
           id="name-filter"
@@ -108,9 +108,10 @@ function Filters() {
           onChange={ (e) => setNameSearch(e.target.value) }
         />
       </label>
-      <div>
+      <div className="container-select-filter">
         <label htmlFor="column-filter">
           Coluna
+          <br />
           <select
             data-testid="column-filter"
             id="column-filter"
@@ -126,6 +127,7 @@ function Filters() {
         </label>
         <label htmlFor="comparison-filter">
           Operador
+          <br />
           <select
             data-testid="comparison-filter"
             id="comparison-filter"
@@ -156,8 +158,61 @@ function Filters() {
         >
           FILTRAR
         </button>
+
+        <label htmlFor="column-sort">
+          Ordenar
+          <br />
+          <select
+            data-testid="column-sort"
+            id="column-sort"
+            onChange={ (e) => setObjSort((prevState) => (
+              { ...prevState, column: e.target.value })) }
+            defaultValue={ objSort.column }
+          >
+            {
+              columOptionsInit.map((option, index) => (
+                <option key={ index }>{ option }</option>
+              ))
+            }
+          </select>
+        </label>
+        <div>
+          <label htmlFor="column-sort-input-asc">
+            <input
+              type="radio"
+              id="column-sort-input-asc"
+              data-testid="column-sort-input-asc"
+              name="SORT"
+              value="ASC"
+              onChange={ (e) => setObjSort((prevState) => (
+                { ...prevState, sort: e.target.value })) }
+            />
+            Ascendente
+          </label>
+          <br />
+          <label htmlFor="column-sort-input-desc">
+            <input
+              type="radio"
+              id="column-sort-input-desc"
+              data-testid="column-sort-input-desc"
+              name="SORT"
+              value="DESC"
+              onChange={ (e) => setObjSort((prevState) => (
+                { ...prevState, sort: e.target.value })) }
+            />
+            Descendente
+          </label>
+        </div>
+        <button
+          type="button"
+          data-testid="column-sort-button"
+          onClick={ () => renderByOrder() }
+        >
+          ORDENAR
+        </button>
       </div>
-      <div>
+
+      <div className={ filters.length === 0 ? 'none-view' : 'alo' }>
         {filters.map((filtered, index) => (
           <div
             key={ index }
@@ -177,63 +232,14 @@ function Filters() {
             </button>
           </div>
         ))}
+        <button
+          type="button"
+          data-testid="button-remove-filters"
+          onClick={ () => deleteFilter('', true) }
+        >
+          REMOVER FILTROS
+        </button>
       </div>
-      <div>
-        <label htmlFor="column-sort">
-          Ordenar
-          <select
-            data-testid="column-sort"
-            id="column-sort"
-            onChange={ (e) => setObjSort((prevState) => (
-              { ...prevState, column: e.target.value })) }
-            defaultValue={ objSort.column }
-          >
-            {
-              columOptionsInit.map((option, index) => (
-                <option key={ index }>{ option }</option>
-              ))
-            }
-          </select>
-        </label>
-        <label htmlFor="column-sort-input-asc">
-          Ascendente
-          <input
-            type="radio"
-            id="column-sort-input-asc"
-            data-testid="column-sort-input-asc"
-            name="SORT"
-            value="ASC"
-            onChange={ (e) => setObjSort((prevState) => (
-              { ...prevState, sort: e.target.value })) }
-          />
-        </label>
-        <label htmlFor="column-sort-input-desc">
-          Descendente
-          <input
-            type="radio"
-            id="column-sort-input-desc"
-            data-testid="column-sort-input-desc"
-            name="SORT"
-            value="DESC"
-            onChange={ (e) => setObjSort((prevState) => (
-              { ...prevState, sort: e.target.value })) }
-          />
-          <button
-            type="button"
-            data-testid="column-sort-button"
-            onClick={ () => renderByOrder() }
-          >
-            ORDENAR
-          </button>
-        </label>
-      </div>
-      <button
-        type="button"
-        data-testid="button-remove-filters"
-        onClick={ () => deleteFilter('', true) }
-      >
-        REMOVER FILTROS
-      </button>
     </div>
   );
 }

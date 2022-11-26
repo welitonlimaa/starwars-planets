@@ -1,41 +1,122 @@
-.App {
-  text-align: center;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media ( prefers-reduced-motion : no-preference ) {
-
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  align-items: center;
-  background-color: #282c34;
+html,
+body {
+  min-height: 100vh;
+  min-width: 100vh;
   color: white;
+  background-image: url("./images/fundo-star-wars.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+}
+
+.none-view {
+  display: none;
+}
+
+.app-body {
+  min-width: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
-  font-size: calc(10px + 2vmin);
-  justify-content: center;
-  min-height: 100vh;
+  align-items: center;
+  justify-content: space-around;
+  padding-right: 50px;
+  padding-left: 50px;
+  padding-bottom: 50px;
+  background-color: rgba(2, 4, 25, 0.416)
 }
 
-.App-link {
-  color: #61dafb;
+#img-grafismo {
+  width: 660px;
 }
 
-@keyframes App-logo-spin {
+.container-main {
+  margin-top: -20px;
+  width: 90%;
+  height: 600px;
+  border: 1px solid;
+  overflow-y: scroll;
+  overflow-x: scroll;
+  border-radius: 10px;
+}
 
-  from {
-    transform: rotate(0deg);
-  }
+.container-filters {
+  width: 100%;
+  height: 30%;
+  padding: 10px;
+  /* background-color: aliceblue; */
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
 
-  to {
-    transform: rotate(360deg);
-  }
+input {
+  color: white;
+  border: 1px solid white;
+}
+
+.container-filters #name-filter {
+  width: 400px;
+  height: 30px;
+}
+
+.container-filters #value-filter {
+  width: 100px;
+  height: 30px;
+}
+
+.container-select-filter {
+  padding: 10px;
+  width: 100%;
+  /* background-color: blueviolet; */
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+select,
+button,
+input {
+  background-color: transparent;
+}
+
+select {
+  color: white;
+  border: none;
+  width: 100px;
+  height: 30px;
+  border-bottom: 1px solid;
+}
+
+button {
+  width: 90px;
+  height: 80px;
+  color: white;
+  border: 1px solid rgba(250, 230, 10, 1);
+  border-radius: 5px;
+}
+
+table th,
+td {
+  text-align: center;
+  border: 4px solid;
+}
+
+table td {
+  padding-right: 30px;
+  padding-left: 30px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+table .container-table-films {
+  padding-right: 60px;
+  padding-left: 60px;
 }
