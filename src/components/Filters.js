@@ -106,7 +106,9 @@ function Filters() {
           id="name-filter"
           data-testid="name-filter"
           onChange={ (e) => setNameSearch(e.target.value) }
+          placeholder="Nome do Planeta..."
         />
+        {/* <img src={ lupa } alt="lupa" id="img-lupa" /> */}
       </label>
       <div className="container-select-filter">
         <label htmlFor="column-filter">
@@ -177,10 +179,10 @@ function Filters() {
           </select>
         </label>
         <div>
-          <label htmlFor="column-sort-input-asc">
+          <label htmlFor="input-asc" className="radio-label">
             <input
               type="radio"
-              id="column-sort-input-asc"
+              id="input-asc"
               data-testid="column-sort-input-asc"
               name="SORT"
               value="ASC"
@@ -190,10 +192,10 @@ function Filters() {
             Ascendente
           </label>
           <br />
-          <label htmlFor="column-sort-input-desc">
+          <label htmlFor="input-desc" className="radio-label">
             <input
               type="radio"
-              id="column-sort-input-desc"
+              id="input-desc"
               data-testid="column-sort-input-desc"
               name="SORT"
               value="DESC"
@@ -211,12 +213,12 @@ function Filters() {
           ORDENAR
         </button>
       </div>
-
-      <div className={ filters.length === 0 ? 'none-view' : 'alo' }>
+      <div className={ filters.length === 0 ? 'none-view' : 'list-filters' }>
         {filters.map((filtered, index) => (
           <div
             key={ index }
             data-testid="filter"
+            className="filter-box"
           >
             <span>{filtered.colum}</span>
             {' '}

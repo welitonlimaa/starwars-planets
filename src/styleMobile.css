@@ -1,0 +1,146 @@
+@media (max-width: 919px) {
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        color: white;
+    }
+
+    .app-body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+    }
+
+    .none-view {
+        display: none;
+    }
+
+    .container-main {
+        padding: 5px;
+        margin-top: -14px;
+        width: 95%;
+        height: 100%;
+        margin-bottom: 10px;
+        border: 2px solid white;
+        border-radius: 10px;
+    }
+
+    .container-filters {
+        width: 100%;
+    }
+
+    button,
+    select,
+    input {
+        background-color: white;
+        color: rgb(24, 24, 24);
+        margin: 10px;
+        width: 90%;
+        height: 40px;
+        border-radius: 5px;
+    }
+
+    input {
+        padding: 10px;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+
+    button:hover {
+        background-color: rgb(235, 235, 234);
+        border: 3px solid rgba(250, 230, 10, 1);
+    }
+
+    .radio-label {
+        font-size: 1.4em;
+    }
+
+    #input-asc,
+    #input-desc {
+        width: 1.4em;
+        height: 1.4em;
+        margin-bottom: 10px;
+    }
+
+    .list-filters {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    .filter-box {
+        width: 90%;
+        height: 60px;
+        padding: 10px;
+        background-color: rgba(45, 45, 45, 0.91);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+    }
+
+    .filter-box button {
+        background-color: transparent;
+        width: 25px;
+        height: 25px;
+        font-weight: 800;
+        color: rgb(199, 6, 6);
+        border: 1px solid rgb(199, 6, 6);
+    }
+
+    .container-table {
+        margin-top: 30px;
+        padding: 5px;
+        width: 100%;
+        overflow-x: scroll;
+        overflow-y: scroll;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    thead {
+        background-color: rgb(23, 22, 22);
+    }
+
+    th {
+        padding: 10px;
+    }
+
+    tbody {
+        background-color: rgb(45, 45, 45);
+    }
+
+    tbody td {
+        border: none;
+        border-bottom: 1px solid white;
+    }
+
+    tbody td:nth-child(1) {
+        font-weight: 800;
+    }
+
+    table th,
+    td {
+        text-align: center;
+    }
+
+    table td {
+        padding-right: 30px;
+        padding-left: 30px;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+
+    table .container-table-films {
+        padding-right: 60px;
+        padding-left: 60px;
+    }
+}
